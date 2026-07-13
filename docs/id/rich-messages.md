@@ -198,7 +198,7 @@ return lib.NewActionComposer(c.Client).
     WithBody("Pilih tindakan.").
     WithFooter("DranxX Creative").
     WithImageMedia("https://example.com/header.png").
-    AddReplyAction("Menu", ".menu").
+    AddReplyAction("Menu", c.Prefix+"menu").
     AddURLAction("Website", "https://example.com", true).
     AddCopyAction("Salin kode", "SAZA-2026").
     DispatchInteractive(ctx, c.Chat, c.Event)
@@ -221,8 +221,8 @@ Single select:
 builder.
     AddSingleSelection("Pilih kategori").
     CreateSection("Main Menu", "HOT").
-    CreateRow("FAST", "Utility", "Ping dan status", ".menu info").
-    CreateRow("OWNER", "Owner", "Administrasi", ".menu owner")
+    CreateRow("FAST", "Utility", "Ping dan status", c.Prefix+"menu info").
+    CreateRow("OWNER", "Owner", "Administrasi", c.Prefix+"menu owner")
 ```
 
 Render dan kirim:
@@ -242,8 +242,8 @@ return lib.NewSimpleFlow(c.Client).
     WithBody("Pilih salah satu.").
     WithFooter("Footer").
     WithThumbnail("https://example.com/thumb.png").
-    AddQuickReply("Menu", ".menu").
-    AddQuickReply("Profile", ".profile").
+    AddQuickReply("Menu", c.Prefix+"menu").
+    AddQuickReply("Profile", c.Prefix+"profile").
     DispatchFlow(ctx, c.Chat, c.Event)
 ```
 
@@ -257,7 +257,7 @@ card1, err := lib.NewActionComposer(c.Client).
     WithBody("Paket basic").
     WithFooter("$5").
     WithImageMedia("https://example.com/starter.jpg").
-    AddReplyAction("Beli", ".buy starter").
+    AddReplyAction("Beli", c.Prefix+"buy starter").
     RenderInteractiveCard(ctx)
 if err != nil {
     return err
@@ -268,7 +268,7 @@ card2, err := lib.NewActionComposer(c.Client).
     WithBody("Paket advanced").
     WithFooter("$10").
     WithImageMedia("https://example.com/pro.jpg").
-    AddReplyAction("Beli", ".buy pro").
+    AddReplyAction("Beli", c.Prefix+"buy pro").
     RenderInteractiveCard(ctx)
 if err != nil {
     return err

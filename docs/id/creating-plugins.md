@@ -318,7 +318,8 @@ Catatan:
 - reaction, sticker, dan protocol message dilewati sebelum hook;
 - error hook diabaikan oleh central handler, jadi log sendiri jika perlu;
 - hook berjalan berurutan sesuai registrasi;
-- hindari operasi lambat di hook.
+- user yang sudah diban tetap bisa melewati `Before` hook karena ban check baru dilakukan setelah command dikenali;
+- hindari operasi network lambat di hook, atau jalankan background work yang dibatasi dengan hati-hati.
 
 ## Parsing Command
 

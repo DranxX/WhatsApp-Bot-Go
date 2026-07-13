@@ -1,9 +1,9 @@
 <p align="center">
   <img src="https://files.catbox.moe/l09mf0.png" width="120" alt="SazaBot" />
 </p>
-<h1 align="center">Saza-Bot Go</h1>
+<h1 align="center">Saza-Bot</h1>
 <p align="center">
-  A <strong>Go + whatsmeow</strong> WhatsApp bot starter with plugins, SQLite stores, rich responses, and automatic reconnection.
+  A Super fast and lightweight <strong>Go + whatsmeow</strong> WhatsApp bot starter with plugins, SQLite stores, rich responses, and automatic reconnection.
   <br/>Add a <code>.go</code> file to <code>plugins/</code>, register it in <code>init()</code>, then rebuild.
 </p>
 
@@ -19,9 +19,9 @@
 
 [`Versi Bahasa Indonesia`](README.md)
 
-## What is Saza-Bot Go?
+## What is Saza-Bot?
 
-Saza-Bot Go is a **starter/template**, not a finished production bot. It provides:
+**SAZA (Smart Assistant with Zero-delay Answer)** is a lightweight WhatsApp bot with super fast response for **starter/template**, not a finished production bot. It provides:
 
 - multi-device WhatsApp connectivity through [whatsmeow](https://github.com/tulir/whatsmeow);
 - QR and phone pairing login;
@@ -33,6 +33,21 @@ Saza-Bot Go is a **starter/template**, not a finished production bot. It provide
 - group metadata and blocklist caches;
 - multi-alias spam protection;
 - automatic reconnection with exponential backoff.
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="assets/stats.jpeg" width="200" alt="SazaBot ping — response speed">
+      <br>
+      <sub><b>Super Fast Answer</b></sub>
+    </td>
+    <td align="center">
+      <img src="assets/markdown.jpeg" height="200" alt="SazaBot AI Rich">
+      <br>
+      <sub><b>Meta AI Style</b></sub>
+    </td>
+  </tr>
+</table>
 
 ## Requirements
 
@@ -46,7 +61,7 @@ Saza-Bot Go is a **starter/template**, not a finished production bot. It provide
 git clone <repo-url> template-go
 cd template-go
 cp config.json.example config.json
-nano config.json
+nano config.json # edit phone number
 go mod tidy
 make run
 ```

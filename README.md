@@ -1,9 +1,9 @@
 <p align="center">
   <img src="https://files.catbox.moe/l09mf0.png" width="120" alt="SazaBot" />
 </p>
-<h1 align="center">Saza-Bot Go</h1>
+<h1 align="center">Saza-Bot</h1>
 <p align="center">
-  Template bot WhatsApp berbasis <strong>Go + whatsmeow</strong> dengan sistem plugin, SQLite, rich response, dan reconnect otomatis.
+  Template bot WhatsApp Super fast berbasis <strong>Go + whatsmeow</strong> dengan sistem plugin, SQLite, rich response, dan reconnect otomatis.
   <br/>Tambah file <code>.go</code> ke <code>plugins/</code>, daftarkan lewat <code>init()</code>, lalu build ulang.
 </p>
 
@@ -19,9 +19,9 @@
 
 [`English README`](README_ENG.md)
 
-## Apa itu Saza-Bot Go?
+## Apa itu Saza-Bot?
 
-Saza-Bot Go adalah **starter/template**, bukan bot produksi siap pakai. Project ini menyediakan fondasi untuk membuat bot WhatsApp sendiri dengan:
+**SAZA (Smart Assistant with Zero-delay Answer)** adalah bot WhatsApp lightweight dan super fast sebagai **starter/template**, bukan bot produksi siap pakai. Project ini menyediakan fondasi untuk membuat bot WhatsApp sendiri dengan:
 
 - koneksi multi-device melalui [whatsmeow](https://github.com/tulir/whatsmeow);
 - login QR atau pairing code;
@@ -33,6 +33,23 @@ Saza-Bot Go adalah **starter/template**, bukan bot produksi siap pakai. Project 
 - cache metadata grup dan blocklist;
 - proteksi spam multi-alias;
 - reconnect otomatis dengan exponential backoff.
+
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="assets/stats.jpeg" width="200" alt="SazaBot ping — response speed">
+      <br>
+      <sub><b>⚡Super Fast Answer⚡</b></sub>
+    </td>
+    <td align="center">
+      <img src="assets/markdown.jpeg" height="200" alt="SazaBot AI Rich">
+      <br>
+      <sub><b>Meta AI Style</b></sub>
+    </td>
+  </tr>
+</table>
+
+<img src='https://i.imgur.com/LyHic3i.gif' width="100%"/>
 
 ## Persyaratan
 
@@ -46,7 +63,7 @@ Saza-Bot Go adalah **starter/template**, bukan bot produksi siap pakai. Project 
 git clone <repo-url> template-go
 cd template-go
 cp config.json.example config.json
-nano config.json
+nano config.json # edit phone number
 go mod tidy
 make run
 ```
@@ -327,6 +344,8 @@ template-go/
 - Interactive/rich message memakai protobuf dan node internal WhatsApp. Dukungan dapat berubah mengikuti versi WhatsApp/whatsmeow.
 - Watcher plugin runtime memakai Go `plugin`, yang umumnya tersedia di Linux/macOS dan tidak didukung native di Windows. Build/restart biasa tetap portabel selama dependency mendukung platform tersebut.
 - Statistik server `.ping` membaca `/proc`, sehingga nilai CPU/RAM server paling lengkap di Linux.
+
+<img src='https://i.imgur.com/LyHic3i.gif' width="100%"/>
 
 ## Lisensi dan Kredit
 

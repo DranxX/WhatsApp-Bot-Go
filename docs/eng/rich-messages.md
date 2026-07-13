@@ -243,7 +243,7 @@ return lib.NewActionComposer(c.Client).
     WithBody("Choose an action.").
     WithFooter("DranxX Creative").
     WithImageMedia("https://example.com/header.png").
-    AddReplyAction("Menu", ".menu").
+    AddReplyAction("Menu", c.Prefix+"menu").
     AddURLAction("Website", "https://example.com", true).
     AddCopyAction("Copy code", "SAZA-2026").
     DispatchInteractive(ctx, c.Chat, c.Event)
@@ -269,7 +269,7 @@ Only one attachment type is rendered; image takes precedence over video, then do
 
 ```go
 builder.
-    AddReplyAction("Profile", ".profile", map[string]any{"icon": "REVIEW"}).
+    AddReplyAction("Profile", c.Prefix+"profile", map[string]any{"icon": "REVIEW"}).
     AddURLAction("Docs", "https://example.com/docs", true, map[string]any{"icon": "PROMOTION"}).
     AddCopyAction("Copy token", "ABC-123", map[string]any{"icon": "DOCUMENT"})
 ```
@@ -279,7 +279,7 @@ The optional map is merged into button parameters. For an arbitrary native-flow 
 ```go
 builder.RegisterAction("quick_reply", map[string]any{
     "display_text": "Menu",
-    "id":           ".menu",
+    "id":           c.Prefix + "menu",
 })
 ```
 
@@ -293,10 +293,10 @@ Use `ResetActions()` to clear all accumulated actions.
 builder.
     AddSingleSelection("Choose a category").
     CreateSection("Main menu", "POPULAR").
-    CreateRow("FAST", "Utilities", "Ping and status", ".menu info").
-    CreateRow("OWNER", "Owner commands", "Administration", ".menu owner").
+    CreateRow("FAST", "Utilities", "Ping and status", c.Prefix+"menu info").
+    CreateRow("OWNER", "Owner commands", "Administration", c.Prefix+"menu owner").
     CreateSection("Other").
-    CreateRow("HELP", "Help", "Show all commands", ".help")
+    CreateRow("HELP", "Help", "Show all commands", c.Prefix+"help")
 ```
 
 Calling `CreateRow` before `AddSingleSelection` and `CreateSection` is a no-op.
@@ -318,8 +318,8 @@ return lib.NewSimpleFlow(c.Client).
     WithBody("Select one.").
     WithFooter("Footer").
     WithThumbnail("https://example.com/thumb.png").
-    AddQuickReply("Menu", ".menu").
-    AddQuickReply("Profile", ".profile").
+    AddQuickReply("Menu", c.Prefix+"menu").
+    AddQuickReply("Profile", c.Prefix+"profile").
     DispatchFlow(ctx, c.Chat, c.Event)
 ```
 
@@ -349,7 +349,7 @@ card1, err := lib.NewActionComposer(c.Client).
     WithBody("Basic package").
     WithFooter("$5").
     WithImageMedia("https://example.com/starter.jpg").
-    AddReplyAction("Buy", ".buy starter").
+    AddReplyAction("Buy", c.Prefix+"buy starter").
     RenderInteractiveCard(ctx)
 if err != nil {
     return err
@@ -360,7 +360,7 @@ card2, err := lib.NewActionComposer(c.Client).
     WithBody("Advanced package").
     WithFooter("$10").
     WithImageMedia("https://example.com/pro.jpg").
-    AddReplyAction("Buy", ".buy pro").
+    AddReplyAction("Buy", c.Prefix+"buy pro").
     RenderInteractiveCard(ctx)
 if err != nil {
     return err
