@@ -23,15 +23,15 @@
 
 **SAZA (Smart Assistant with Zero-delay Answer)** adalah bot WhatsApp lightweight dan super fast sebagai **starter/template**, bukan bot produksi siap pakai. Project ini menyediakan fondasi untuk membuat bot WhatsApp sendiri dengan:
 
-- koneksi multi-device melalui [whatsmeow](https://github.com/tulir/whatsmeow);
-- login QR atau pairing code;
-- plugin Go yang mendaftar sendiri melalui `init()`;
-- helper reply, edit, mention, reaction, delete, media, dan presence;
-- AI Rich Response, native-flow button, selection list, dan carousel;
-- session, banned user, dan premium user berbasis SQLite;
-- resolusi identitas LID ↔ nomor telepon;
-- cache metadata grup dan blocklist;
-- proteksi spam multi-alias;
+- koneksi multi-device melalui [whatsmeow](https://github.com/tulir/whatsmeow)
+- login QR atau pairing code
+- plugin Go yang mendaftar sendiri melalui `init()`
+- helper reply, edit, mention, reaction, delete, media, dan presence
+- AI Rich Response, native-flow button, selection list, dan carousel
+- session, banned user, dan premium user berbasis SQLite
+- resolusi identitas LID ↔ nomor telepon
+- cache metadata grup dan blocklist
+- proteksi spam multi-alias
 - reconnect otomatis dengan exponential backoff.
 
 <table align="center">
@@ -123,7 +123,7 @@ Salin `config.json.example` menjadi `config.json`, lalu isi nomor dengan digit s
 | `status` | string | Tidak | `public`, `ponly`, `gonly`, atau `self`. |
 | `autoread` | string | Tidak | `enable` atau `disable`. |
 | `loginMethod` | string | Tidak | `qr` atau `pairs`. |
-| `markdown` | boolean | Tidak | Hint untuk plugin; WhatsApp mendukung markdown dasar secara native. |
+| `markdown` | boolean | Tidak | Hint untuk plugin WhatsApp mendukung markdown dasar secara native. |
 
 Nilai config dinormalisasi ketika dimuat. Prefix kosong menjadi `.`, status tidak valid menjadi `public`, dan metode login tidak valid menjadi `qr`. Command `.set` dan `.setp` memperbarui sekaligus menyimpan `config.json`.
 
@@ -172,9 +172,9 @@ Durasi mendukung gabungan `s`, `m`, `h`, dan `d`, misalnya `30m`, `12h`, atau `1
 
 Target user dapat diberikan melalui:
 
-1. reply pesan target;
-2. mention `@user`;
-3. nomor langsung, misalnya `.ban 6281234567890 1h`;
+1. reply pesan target
+2. mention `@user`
+3. nomor langsung, misalnya `.ban 6281234567890 1h`
 4. pada chat pribadi, target default adalah lawan chat jika tidak ada target eksplisit.
 
 ## Membuat Plugin Singkat
@@ -220,8 +220,8 @@ return lib.NewComposer(c.Client).
 
 Builder lain yang tersedia:
 
-- `lib.NewActionComposer(...)` — quick reply, URL, copy, dan single-select;
-- `lib.NewSimpleFlow(...)` — kartu tombol ringkas;
+- `lib.NewActionComposer(...)` — quick reply, URL, copy, dan single-select
+- `lib.NewSimpleFlow(...)` — kartu tombol ringkas
 - `lib.NewCarouselComposer(...)` — carousel dari beberapa interactive card.
 
 ## Format Log
@@ -230,7 +230,7 @@ Builder lain yang tersedia:
 |---|---|
 | `[msg]` | Pesan teks |
 | `[img]` / `[vid]` / `[doc]` | Media dengan caption |
-| `[audio]` | Audio/voice note; tanpa teks tidak menjadi command |
+| `[audio]` | Audio/voice note tanpa teks tidak menjadi command |
 | `[self]` | Pesan dari device bot |
 | `[command]` | Command yang ditemukan dan dieksekusi |
 | `[PLUGIN ERROR]` | Handler mengembalikan error |
@@ -256,9 +256,9 @@ Ban dicocokkan menggunakan nomor telepon dan LID. Entri kedaluwarsa dibersihkan 
 
 Aturan spam command:
 
-- maksimal 3 command berturut-turut dengan jeda kurang dari 2 detik;
-- command ke-4 mendapat peringatan;
-- command ke-5 menghasilkan temporary ban 5 menit;
+- maksimal 3 command berturut-turut dengan jeda kurang dari 2 detik
+- command ke-4 mendapat peringatan
+- command ke-5 menghasilkan temporary ban 5 menit
 - penghitung di-reset setelah jeda dan state lama dibersihkan berkala.
 
 ### Premium
@@ -336,7 +336,7 @@ template-go/
 ├── docs/
 │   ├── id/
 │   └── eng/
-└── db/                        # Dibuat otomatis; tidak masuk Git
+└── db/                        # Dibuat otomatis tidak masuk Git
 ```
 
 ## Catatan Kompatibilitas

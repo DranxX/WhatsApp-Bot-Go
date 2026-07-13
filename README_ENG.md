@@ -23,15 +23,15 @@
 
 **SAZA (Smart Assistant with Zero-delay Answer)** is a lightweight WhatsApp bot with super fast response for **starter/template**, not a finished production bot. It provides:
 
-- multi-device WhatsApp connectivity through [whatsmeow](https://github.com/tulir/whatsmeow);
-- QR and phone pairing login;
-- self-registering Go plugins using `init()`;
-- reply, edit, mention, reaction, deletion, media, and presence helpers;
-- AI Rich Response, native-flow buttons, selection lists, and carousels;
-- SQLite-backed session, ban, and premium data;
-- LID ↔ phone identity resolution;
-- group metadata and blocklist caches;
-- multi-alias spam protection;
+- multi-device WhatsApp connectivity through [whatsmeow](https://github.com/tulir/whatsmeow)
+- QR and phone pairing login
+- self-registering Go plugins using `init()`
+- reply, edit, mention, reaction, deletion, media, and presence helpers
+- AI Rich Response, native-flow buttons, selection lists, and carousels
+- SQLite-backed session, ban, and premium data
+- LID ↔ phone identity resolution
+- group metadata and blocklist caches
+- multi-alias spam protection
 - automatic reconnection with exponential backoff.
 
 <table align="center">
@@ -114,14 +114,14 @@ Copy `config.json.example` to `config.json`. Phone numbers must contain digits o
 
 | Field | Type | Required | Description |
 |---|---|---:|---|
-| `name` | string | No | Display name; defaults to `Template Go`. |
+| `name` | string | No | Display name defaults to `Template Go`. |
 | `owner` | string | Yes | Owner number with access to owner commands. |
 | `bot` | string | Recommended | Bot number, used for pairing and identity checks. |
-| `prefix` | string | No | Command prefix; defaults to `.`. |
+| `prefix` | string | No | Command prefix defaults to `.`. |
 | `status` | string | No | `public`, `ponly`, `gonly`, or `self`. |
 | `autoread` | string | No | `enable` or `disable`. |
 | `loginMethod` | string | No | `qr` or `pairs`. |
-| `markdown` | boolean | No | A hint for plugins; WhatsApp renders basic markdown natively. |
+| `markdown` | boolean | No | A hint for plugins WhatsApp renders basic markdown natively. |
 
 Invalid values are normalized. `.set` and `.setp` update and persist `config.json` at runtime.
 
@@ -250,7 +250,7 @@ template-go/
 ## Compatibility Notes
 
 - Rich and interactive messages rely on internal WhatsApp protobufs and may change with WhatsApp/whatsmeow versions.
-- Runtime plugin watching uses Go `plugin`; it is generally available on Linux/macOS and unavailable natively on Windows. Normal rebuilding remains portable.
+- Runtime plugin watching uses Go `plugin` it is generally available on Linux/macOS and unavailable natively on Windows. Normal rebuilding remains portable.
 - `.ping` reads `/proc` for host CPU/RAM details, so full host metrics are Linux-specific.
 
 <img src='https://i.imgur.com/LyHic3i.gif' width="100%"/>
