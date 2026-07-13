@@ -39,7 +39,7 @@
     <td align="center">
       <img src="assets/stats.jpeg" width="200" alt="SazaBot ping — response speed">
       <br>
-      <sub><b>Super Fast Answer</b></sub>
+      <sub><b>⚡Super Fast Answer⚡</b></sub>
     </td>
     <td align="center">
       <img src="assets/markdown.jpeg" height="200" alt="SazaBot AI Rich">
@@ -48,6 +48,8 @@
     </td>
   </tr>
 </table>
+
+<img src='https://i.imgur.com/LyHic3i.gif' width="100%"/>
 
 ## Requirements
 
@@ -82,6 +84,16 @@ make build
 | `make clean` | Remove the built binary |
 
 > `go run .` enables an experimental plugin watcher. Changed plugin files are compiled as Go plugins where `-buildmode=plugin` is supported. Restarting `make run` or rebuilding remains the most reliable workflow.
+
+
+## Documentation
+
+| Document | Description |
+|---|---|
+| [`docs/eng/creating-plugins.md`](docs/eng/creating-plugins.md) | Go plugin guide, `Ctx` reference, messaging, target resolution, premium, and hooks |
+| [`docs/eng/rich-messages.md`](docs/eng/rich-messages.md) | AIRich, native-flow buttons, selection lists, media headers, and carousels |
+| [`docs/id/creating-plugins.md`](docs/id/creating-plugins.md) | Indonesian plugin guide |
+| [`docs/id/rich-messages.md`](docs/id/rich-messages.md) | Indonesian rich-message reference |
 
 ## Configuration
 
@@ -121,14 +133,6 @@ For phone pairing, set `"loginMethod": "pairs"` and configure `bot` or `owner`. 
 
 Session data is stored in `db/session/template-session.db`. Run `make reset-session` to force a new login.
 
-## Documentation
-
-| Document | Description |
-|---|---|
-| [`docs/eng/creating-plugins.md`](docs/eng/creating-plugins.md) | Go plugin guide, `Ctx` reference, messaging, target resolution, premium, and hooks |
-| [`docs/eng/rich-messages.md`](docs/eng/rich-messages.md) | AIRich, native-flow buttons, selection lists, media headers, and carousels |
-| [`docs/id/creating-plugins.md`](docs/id/creating-plugins.md) | Indonesian plugin guide |
-| [`docs/id/rich-messages.md`](docs/id/rich-messages.md) | Indonesian rich-message reference |
 
 ## Built-in Commands
 
@@ -248,6 +252,8 @@ template-go/
 - Rich and interactive messages rely on internal WhatsApp protobufs and may change with WhatsApp/whatsmeow versions.
 - Runtime plugin watching uses Go `plugin`; it is generally available on Linux/macOS and unavailable natively on Windows. Normal rebuilding remains portable.
 - `.ping` reads `/proc` for host CPU/RAM details, so full host metrics are Linux-specific.
+
+<img src='https://i.imgur.com/LyHic3i.gif' width="100%"/>
 
 ## License and Credits
 

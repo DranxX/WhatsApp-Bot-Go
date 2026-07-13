@@ -51,7 +51,7 @@
 
 <img src='https://i.imgur.com/LyHic3i.gif' width="100%"/>
 
-## Persyaratan
+## Requirements
 
 - **Go 1.25+**
 - **git**
@@ -75,9 +75,9 @@ make build
 ./template-go
 ```
 
-Perintah Makefile:
+Command Makefile:
 
-| Perintah | Fungsi |
+| Command | Fungsi |
 |---|---|
 | `make run` | Menjalankan langsung dengan `go run .` |
 | `make build` | `go mod tidy`, lalu build ke binary `template-go` |
@@ -86,6 +86,16 @@ Perintah Makefile:
 | `make clean` | Menghapus binary hasil build |
 
 > `go run .` mengaktifkan watcher plugin eksperimental. Perubahan file plugin dikompilasi sebagai Go plugin pada platform yang mendukung `-buildmode=plugin`. Untuk hasil paling konsisten, restart `make run` atau build ulang setelah mengubah plugin.
+
+
+## Dokumentasi
+
+| Docs | Keterangan |
+|---|---|
+| [`docs/id/creating-plugins.md`](docs/id/creating-plugins.md) | Panduan plugin Go, referensi `Ctx`, helper pesan, target, premium, dan Before hook |
+| [`docs/id/rich-messages.md`](docs/id/rich-messages.md) | AIRich, button/native flow, selection list, media header, dan carousel |
+| [`docs/eng/creating-plugins.md`](docs/eng/creating-plugins.md) | English plugin development guide |
+| [`docs/eng/rich-messages.md`](docs/eng/rich-messages.md) | English rich-message builder reference |
 
 ## Konfigurasi — `config.json`
 
@@ -138,15 +148,6 @@ Session tersimpan di `db/session/template-session.db`. Untuk memaksa login ulang
 ```bash
 make reset-session
 ```
-
-## Dokumentasi
-
-| Dokumen | Keterangan |
-|---|---|
-| [`docs/id/creating-plugins.md`](docs/id/creating-plugins.md) | Panduan plugin Go, referensi `Ctx`, helper pesan, target, premium, dan Before hook |
-| [`docs/id/rich-messages.md`](docs/id/rich-messages.md) | AIRich, button/native flow, selection list, media header, dan carousel |
-| [`docs/eng/creating-plugins.md`](docs/eng/creating-plugins.md) | English plugin development guide |
-| [`docs/eng/rich-messages.md`](docs/eng/rich-messages.md) | English rich-message builder reference |
 
 ## Command Bawaan
 
