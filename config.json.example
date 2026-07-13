@@ -1,0 +1,10 @@
+{
+  "name": "Saza-Bot",
+  "owner": "628...",
+  "bot": "628...",
+  "prefix": ".",
+  "status": "public",
+  "autoread": "enable",
+  "loginMethod": "qr",
+  "markdown": true
+}
