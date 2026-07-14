@@ -3,8 +3,8 @@
 </p>
 <h1 align="center">Saza-Bot</h1>
 <p align="center">
-  Template bot WhatsApp Super fast berbasis <strong>Go + whatsmeow</strong> dengan sistem plugin, SQLite, rich response, dan reconnect otomatis.
-  <br/>Tambah file <code>.go</code> ke <code>plugins/</code>, daftarkan lewat <code>init()</code>, lalu build ulang.
+  A Super fast and lightweight <strong>Go + whatsmeow</strong> WhatsApp bot starter with plugins, SQLite stores, rich responses, and automatic reconnection.
+  <br/>Add a <code>.go</code> file to <code>plugins/</code>, register it in <code>init()</code>, then rebuild.
 </p>
 
 <p align="center">
@@ -17,22 +17,22 @@
 
 ---
 
-[`English README`](README_ENG.md)
+[`Versi Bahasa Indonesia`](README.md)
 
-## Apa itu Saza-Bot?
+## What is Saza-Bot?
 
-**SAZA (Smart Assistant with Zero-delay Answer)** adalah bot WhatsApp lightweight dan super fast sebagai **starter/template**, bukan bot produksi siap pakai. Project ini menyediakan fondasi untuk membuat bot WhatsApp sendiri dengan:
+**SAZA (Smart Assistant with Zero-delay Answer)** is a lightweight WhatsApp bot with super fast response for **starter/template**, not a finished production bot. It provides:
 
-- koneksi multi-device melalui [whatsmeow](https://github.com/tulir/whatsmeow)
-- login QR atau pairing code
-- plugin Go yang mendaftar sendiri melalui `init()`
-- helper reply, edit, mention, reaction, delete, media, dan presence
-- AI Rich Response, native-flow button, selection list, dan carousel
-- session, banned user, dan premium user berbasis SQLite
-- resolusi identitas LID ↔ nomor telepon
-- cache metadata grup dan blocklist
-- proteksi spam multi-alias
-- reconnect otomatis dengan exponential backoff.
+- multi-device WhatsApp connectivity through [whatsmeow](https://github.com/tulir/whatsmeow)
+- QR and phone pairing login
+- self-registering Go plugins using `init()`
+- reply, edit, mention, reaction, deletion, media, and presence helpers
+- AI Rich Response, native-flow buttons, selection lists, and carousels
+- SQLite-backed session, ban, and premium data
+- LID ↔ phone identity resolution
+- group metadata and blocklist caches
+- multi-alias spam protection
+- automatic reconnection with exponential backoff.
 
 <table align="center">
   <tr>
@@ -55,9 +55,9 @@
 
 - **Go 1.25+**
 - **git**
-- Tidak membutuhkan `gcc` untuk konfigurasi bawaan karena memakai SQLite pure-Go (`modernc.org/sqlite`)
+- No `gcc` is required by default because the project uses pure-Go SQLite (`modernc.org/sqlite`)
 
-## Instalasi
+## Install
 
 ```bash
 git clone <repo-url> template-go
@@ -68,38 +68,36 @@ go mod tidy
 make run
 ```
 
-Atau build binary:
+Build a binary instead:
 
 ```bash
 make build
 ./template-go
 ```
 
-Command Makefile:
-
-| Command | Fungsi |
+| Command | Purpose |
 |---|---|
-| `make run` | Menjalankan langsung dengan `go run .` |
-| `make build` | `go mod tidy`, lalu build ke binary `template-go` |
-| `make tidy` | Merapikan dan mengunduh dependency Go |
-| `make reset-session` | Menghapus database session agar login ulang |
-| `make clean` | Menghapus binary hasil build |
+| `make run` | Run with `go run .` |
+| `make build` | Tidy modules and build `template-go` |
+| `make tidy` | Download and tidy Go dependencies |
+| `make reset-session` | Delete the session database and force a new login |
+| `make clean` | Remove the built binary |
 
-> `go run .` mengaktifkan watcher plugin eksperimental. Perubahan file plugin dikompilasi sebagai Go plugin pada platform yang mendukung `-buildmode=plugin`. Untuk hasil paling konsisten, restart `make run` atau build ulang setelah mengubah plugin.
+> `go run .` enables an experimental plugin watcher. Changed plugin files are compiled as Go plugins where `-buildmode=plugin` is supported. Restarting `make run` or rebuilding remains the most reliable workflow.
 
 
-## Dokumentasi
+## Documentation
 
-| Docs | Keterangan |
+| Document | Description |
 |---|---|
-| [`docs/id/creating-plugins.md`](docs/id/creating-plugins.md) | Panduan plugin Go, referensi `Ctx`, helper pesan, target, premium, dan Before hook |
-| [`docs/id/rich-messages.md`](docs/id/rich-messages.md) | AIRich, button/native flow, selection list, media header, dan carousel |
-| [`docs/eng/creating-plugins.md`](docs/eng/creating-plugins.md) | English plugin development guide |
-| [`docs/eng/rich-messages.md`](docs/eng/rich-messages.md) | English rich-message builder reference |
+| [`docs/eng/creating-plugins.md`](docs/eng/creating-plugins.md) | Go plugin guide, `Ctx` reference, messaging, target resolution, premium, and hooks |
+| [`docs/eng/rich-messages.md`](docs/eng/rich-messages.md) | AIRich, native-flow buttons, selection lists, media headers, and carousels |
+| [`docs/id/creating-plugins.md`](docs/id/creating-plugins.md) | Indonesian plugin guide |
+| [`docs/id/rich-messages.md`](docs/id/rich-messages.md) | Indonesian rich-message reference |
 
-## Konfigurasi — `config.json`
+## Configuration
 
-Salin `config.json.example` menjadi `config.json`, lalu isi nomor dengan digit saja tanpa `+`, spasi, atau tanda baca.
+Copy `config.json.example` to `config.json`. Phone numbers must contain digits only, without `+`, spaces, or punctuation.
 
 ```json
 {
@@ -114,70 +112,50 @@ Salin `config.json.example` menjadi `config.json`, lalu isi nomor dengan digit s
 }
 ```
 
-| Field | Tipe | Wajib | Keterangan |
+| Field | Type | Required | Description |
 |---|---|---:|---|
-| `name` | string | Tidak | Nama bot. Default `Template Go`. |
-| `owner` | string | Ya | Nomor owner untuk akses command owner. |
-| `bot` | string | Disarankan | Nomor bot, terutama untuk pairing dan deteksi identitas. |
-| `prefix` | string | Tidak | Prefix command. Default `.`. |
-| `status` | string | Tidak | `public`, `ponly`, `gonly`, atau `self`. |
-| `autoread` | string | Tidak | `enable` atau `disable`. |
-| `loginMethod` | string | Tidak | `qr` atau `pairs`. |
-| `markdown` | boolean | Tidak | Hint untuk plugin WhatsApp mendukung markdown dasar secara native. |
+| `name` | string | No | Display name defaults to `Template Go`. |
+| `owner` | string | Yes | Owner number with access to owner commands. |
+| `bot` | string | Recommended | Bot number, used for pairing and identity checks. |
+| `prefix` | string | No | Command prefix defaults to `.`. |
+| `status` | string | No | `public`, `ponly`, `gonly`, or `self`. |
+| `autoread` | string | No | `enable` or `disable`. |
+| `loginMethod` | string | No | `qr` or `pairs`. |
+| `markdown` | boolean | No | A hint for plugins WhatsApp renders basic markdown natively. |
 
-Nilai config dinormalisasi ketika dimuat. Prefix kosong menjadi `.`, status tidak valid menjadi `public`, dan metode login tidak valid menjadi `qr`. Command `.set` dan `.setp` memperbarui sekaligus menyimpan `config.json`.
+Invalid values are normalized. `.set` and `.setp` update and persist `config.json` at runtime.
 
-## Metode Login
+## Login
 
-### QR code
+For QR login, set `"loginMethod": "qr"`, start the bot, and scan the terminal QR from **WhatsApp → Linked Devices → Link a Device**.
 
-Atur `"loginMethod": "qr"`, jalankan bot, lalu buka:
+For phone pairing, set `"loginMethod": "pairs"` and configure `bot` or `owner`. If neither is set, the terminal asks for a number.
 
-**WhatsApp → Perangkat Tertaut → Tautkan Perangkat → scan QR terminal**
+Session data is stored in `db/session/template-session.db`. Run `make reset-session` to force a new login.
 
-QR diperbarui sampai lima kali. Jika terus kedaluwarsa, session dibersihkan dan proses koneksi dimulai ulang.
 
-### Pairing code
+## Built-in Commands
 
-Atur `"loginMethod": "pairs"` dan isi `bot` atau `owner`. Bot meminta kode pairing untuk nomor tersebut. Jika keduanya kosong, nomor akan diminta melalui terminal.
-
-Masukkan kode di **WhatsApp → Perangkat Tertaut → Tautkan Perangkat → Tautkan dengan nomor telepon**.
-
-Session tersimpan di `db/session/template-session.db`. Untuk memaksa login ulang:
-
-```bash
-make reset-session
-```
-
-## Command Bawaan
-
-| Command | Kategori | Keterangan |
+| Command | Category | Description |
 |---|---|---|
-| `.menu` / `.help` | info | Menampilkan command berdasarkan kategori |
-| `.profile` | info | Menampilkan status premium dan kredit |
-| `.msgbuild` / `.airich` | info | Demo rich response dan interactive message |
-| `.hello` / `.hi` | info | Contoh plugin Go |
-| `.ping` / `.stats` / `.status` | utility | Latency, CPU, RAM, platform, dan uptime |
-| `$ <command>` | owner | Menjalankan shell command dengan timeout 30 detik |
-| `.set <mode>` | owner | Mengubah `public`, `ponly`, `gonly`, atau `self` |
-| `.setp <prefix>` / `.setprefix` | owner | Mengubah prefix dan menyimpan config |
-| `.ban <target> [durasi]` | owner | Ban permanen atau sementara |
-| `.unban <target>` | owner | Menghapus ban |
-| `.listban` / `.banlist` | owner | Daftar banned user |
-| `.addprem <target> [durasi]` | owner | Menambah atau memperbarui premium |
-| `.delprem <target>` | owner | Menghapus premium |
-| `.listprem` | owner | Daftar premium dan kredit |
+| `.menu` / `.help` | info | Show commands by category |
+| `.profile` | info | Show premium status and credits |
+| `.msgbuild` / `.airich` | info | Demonstrate rich and interactive messages |
+| `.hello` / `.hi` | info | Example Go plugin |
+| `.ping` / `.stats` / `.status` | utility | Latency, CPU, RAM, platform, and uptime |
+| `$ <command>` | owner | Run a shell command with a 30-second timeout |
+| `.set <mode>` | owner | Set `public`, `ponly`, `gonly`, or `self` mode |
+| `.setp <prefix>` / `.setprefix` | owner | Change and persist the prefix |
+| `.ban <target> [duration]` | owner | Add a permanent or temporary ban |
+| `.unban <target>` | owner | Remove a ban |
+| `.listban` / `.banlist` | owner | List banned users |
+| `.addprem <target> [duration]` | owner | Add or update premium access |
+| `.delprem <target>` | owner | Remove premium access |
+| `.listprem` | owner | List premium users and credits |
 
-Durasi mendukung gabungan `s`, `m`, `h`, dan `d`, misalnya `30m`, `12h`, atau `1d12h`. Tanpa durasi berarti permanen.
+Durations support `s`, `m`, `h`, and `d`, including combinations such as `1d12h`. An omitted duration means permanent. Targets can be supplied by reply, mention, direct number, or—inside a private chat—the other participant by default.
 
-Target user dapat diberikan melalui:
-
-1. reply pesan target
-2. mention `@user`
-3. nomor langsung, misalnya `.ban 6281234567890 1h`
-4. pada chat pribadi, target default adalah lawan chat jika tidak ada target eksplisit.
-
-## Membuat Plugin Singkat
+## Minimal Plugin
 
 ```go
 // plugins/info-hello.go
@@ -197,49 +175,28 @@ func init() {
 }
 ```
 
-Simpan file, lalu restart `make run` atau build ulang. Plugin berada dalam package `plugins`, jadi dapat langsung memakai `Plugin`, `Ctx`, `Register`, dan helper package tersebut.
+Save the file, then restart `make run` or rebuild. Common categories are `ai`, `info`, `utility`, `downloader`, `owner`, and `hidden`.
 
-Kategori umum: `ai`, `info`, `utility`, `downloader`, `owner`, dan `hidden`. Plugin `hidden` tidak muncul di menu dan biasanya memakai `Before` hook.
-
-## Rich Message Singkat
+## Rich Message Example
 
 ```go
 import "template-go/lib"
 
 return lib.NewComposer(c.Client).
-    WithHeader("Hasil Pencarian").
-    AppendText("Berikut hasil untuk *Saza-Bot*.").
+    WithHeader("Search Results").
+    AppendText("Results for *Saza-Bot*.").
     AppendCode("go", "fmt.Println(\"hello\")").
     AppendTable([][]string{
-        {"File", "Fungsi"},
+        {"File", "Purpose"},
         {"main.go", "Entry point"},
     }).
     AppendSuggestedPills([]string{"Menu", "Profile"}).
     DispatchMessage(ctx, c.Chat, c.Event)
 ```
 
-Builder lain yang tersedia:
+Additional builders are `NewActionComposer`, `NewSimpleFlow`, and `NewCarouselComposer`.
 
-- `lib.NewActionComposer(...)` — quick reply, URL, copy, dan single-select
-- `lib.NewSimpleFlow(...)` — kartu tombol ringkas
-- `lib.NewCarouselComposer(...)` — carousel dari beberapa interactive card.
-
-## Format Log
-
-| Tag | Isi |
-|---|---|
-| `[msg]` | Pesan teks |
-| `[img]` / `[vid]` / `[doc]` | Media dengan caption |
-| `[audio]` | Audio/voice note tanpa teks tidak menjadi command |
-| `[self]` | Pesan dari device bot |
-| `[command]` | Command yang ditemukan dan dieksekusi |
-| `[PLUGIN ERROR]` | Handler mengembalikan error |
-| `[SESSION]` | Login, koneksi, disconnect, dan reconnect |
-| `[CACHE]` | Invalidasi metadata grup |
-
-Reaction, sticker, dan protocol message dilewati sebelum dispatch command.
-
-## Penyimpanan
+## Persistence and Protection
 
 ```text
 db/
@@ -248,108 +205,58 @@ db/
 └── premium/premium.db
 ```
 
-Semua database menggunakan SQLite dengan WAL, `synchronous=NORMAL`, dan `busy_timeout=5000`. File runtime di bawah `db/` diabaikan Git.
+The databases use SQLite WAL, `synchronous=NORMAL`, and a 5-second busy timeout. Bans match phone and LID aliases. Premium users receive 10 credits per calendar month, lazily reset when accessed in a new period.
 
-### Ban
+Command spam protection allows three rapid commands, warns on the fourth, and applies a five-minute temporary ban on the fifth. Phone, LID, and JID aliases share one counter.
 
-Ban dicocokkan menggunakan nomor telepon dan LID. Entri kedaluwarsa dibersihkan secara lazy ketika store diakses. Proteksi spam memakai identitas nomor, LID, dan JID yang menunjuk state penghitung sama agar tidak mudah dilewati.
-
-Aturan spam command:
-
-- maksimal 3 command berturut-turut dengan jeda kurang dari 2 detik
-- command ke-4 mendapat peringatan
-- command ke-5 menghasilkan temporary ban 5 menit
-- penghitung di-reset setelah jeda dan state lama dibersihkan berkala.
-
-### Premium
-
-Premium memiliki **10 kredit per bulan**. Kredit di-reset secara lazy saat profil pertama kali dibaca pada periode kalender baru. Store juga menyediakan fungsi untuk consume, set, tambah, dan kurangi kredit.
-
-## Arsitektur
-
-### Startup dan koneksi
+## Architecture
 
 ```text
-main()
-  ├── config.Load("config.json")
-  ├── init SQLite session, banned, premium
-  ├── connectToWhatsApp()
-  │     ├── buka sqlstore whatsmeow
-  │     ├── login QR/pairing jika device belum terdaftar
-  │     └── client.Connect() jika session sudah ada
-  └── eventHandler
-        ├── Connected      → reset backoff, resolve owner, warm cache
-        ├── Disconnected   → jadwalkan reconnect
-        ├── StreamReplaced → disconnect koneksi lama, reconnect 10 detik
-        ├── LoggedOut      → hapus session, login ulang
-        ├── Message        → handler.Handle()
-        ├── GroupInfo      → invalidasi cache grup
-        └── CallOffer      → tolak panggilan dan kirim pemberitahuan
+Startup
+  → load config and initialize SQLite stores
+  → connect or start QR/pairing login
+  → whatsmeow event handler
+      ├── connection events → reconnect/session recovery
+      ├── group updates → cache invalidation
+      ├── call offers → reject
+      └── messages → handler.Handle()
+
+Message pipeline
+  → reject stale/broadcast/protocol messages
+  → unwrap ephemeral/view-once/document wrappers
+  → extract text, type, quote, mentions, and sender
+  → resolve LID, blocklist, and cached group metadata
+  → apply status mode
+  → run every Before hook
+  → parse prefix or "$ " and normalize Unicode command text
+  → plugin lookup → ban → spam → autoread
+  → execute plugin handler
 ```
 
-### Pipeline pesan
-
-```text
-Message event
-  ├── abaikan pesan lama (>60 detik), broadcast, protocol
-  ├── unwrap ephemeral / view-once / document-with-caption
-  ├── ekstrak text, type, quote, mention, sender
-  ├── resolve LID → phone
-  ├── cek blocklist untuk pesan grup
-  ├── ambil metadata grup (cache 5 menit, stale-while-refresh)
-  ├── hitung owner dan status admin grup
-  ├── filter mode public / ponly / gonly / self
-  ├── jalankan semua Before hook
-  ├── parse prefix atau "$ "
-  ├── normalisasi command Unicode NFD
-  ├── lookup plugin → ban → spam → autoread
-  └── plugin.Handler(context.Background(), c)
-```
-
-## Struktur Direktori
+## Directory Structure
 
 ```text
 template-go/
-├── main.go                    # Startup, session, event loop, reconnect
-├── Makefile
-├── go.mod
-├── config.json.example
-├── config/
-│   └── config.go              # Config thread-safe + persistence
-├── handler/
-│   └── handler.go             # Pipeline pesan, cache, spam protection
-├── plugins/
-│   ├── registry.go            # Registry plugin thread-safe
-│   ├── ctx.go                 # Context, parser, dan helper pesan/media
-│   ├── demo-hello.go
-│   ├── info-*.go
-│   ├── utility-*.go
-│   ├── owner-*.go
-│   └── hidden-*.go
-├── lib/
-│   ├── airich.go              # AIRich, native flow, carousel builders
-│   └── airich_test.go
-├── store/
-│   ├── banned.go              # SQLite banned store
-│   ├── premium.go             # SQLite premium + credit store
-│   └── owner.go               # Cache identitas LID ↔ phone
-├── docs/
-│   ├── id/
-│   └── eng/
-└── db/                        # Dibuat otomatis tidak masuk Git
+├── main.go
+├── config/                  # Thread-safe config and persistence
+├── handler/                 # Message pipeline, caches, spam protection
+├── plugins/                 # Registry, Ctx helpers, built-in plugins
+├── lib/                     # Rich response and interactive builders
+├── store/                   # Ban, premium, and identity stores
+├── docs/                    # Indonesian and English documentation
+└── db/                      # Runtime databases, generated automatically
 ```
 
-## Catatan Kompatibilitas
+## Compatibility Notes
 
-- Project bergantung pada versi pseudo `whatsmeow` yang tercantum di `go.mod`.
-- Interactive/rich message memakai protobuf dan node internal WhatsApp. Dukungan dapat berubah mengikuti versi WhatsApp/whatsmeow.
-- Watcher plugin runtime memakai Go `plugin`, yang umumnya tersedia di Linux/macOS dan tidak didukung native di Windows. Build/restart biasa tetap portabel selama dependency mendukung platform tersebut.
-- Statistik server `.ping` membaca `/proc`, sehingga nilai CPU/RAM server paling lengkap di Linux.
+- Rich and interactive messages rely on internal WhatsApp protobufs and may change with WhatsApp/whatsmeow versions.
+- Runtime plugin watching uses Go `plugin` it is generally available on Linux/macOS and unavailable natively on Windows. Normal rebuilding remains portable.
+- `.ping` reads `/proc` for host CPU/RAM details, so full host metrics are Linux-specific.
 
 <img src='https://i.imgur.com/LyHic3i.gif' width="100%"/>
 
-## Lisensi dan Kredit
+## License and Credits
 
-MIT — bebas digunakan untuk kebutuhan pribadi dan komersial. Base dibuat oleh **[@DranxX](https://github.com/DranXX)**.
+MIT — free for personal and commercial use. Base created by **[@DranxX](https://github.com/DranXX)**.
 
-Didukung oleh [whatsmeow](https://github.com/tulir/whatsmeow) dan SQLite pure-Go melalui [`modernc.org/sqlite`](https://pkg.go.dev/modernc.org/sqlite).
+Powered by [whatsmeow](https://github.com/tulir/whatsmeow) and pure-Go SQLite through [`modernc.org/sqlite`](https://pkg.go.dev/modernc.org/sqlite).
