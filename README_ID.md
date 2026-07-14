@@ -17,7 +17,7 @@
 
 ---
 
-[`English README`](README_ENG.md)
+[`English README`](README.md)
 
 ## Apa itu Saza-Bot?
 
